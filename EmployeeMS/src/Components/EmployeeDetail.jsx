@@ -9,7 +9,7 @@ const EmployeeDetail = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get('http://localhost:3000/employee/detail/'+id)
+        axios.get('${import.meta.env.VITE_API_URL}/employee/detail/'+id)
         .then(result => {
             setEmployee(result.data[0])
         })
@@ -18,7 +18,7 @@ const EmployeeDetail = () => {
 
 
     const handleLogout = () => {
-        axios.get('http://localhost:3000/employee/logout')
+        axios.get('${import.meta.env.VITE_API_URL}/employee/logout')
         .then(result => {
           if(result.data.Status) {
             localStorage.setItem("valid", true)
@@ -32,7 +32,7 @@ const EmployeeDetail = () => {
               <h4>Emoployee Management System</h4>
           </div>
           <div className='d-flex justify-content-center flex-column align-items-center mt-3'>
-              <img src={`http://localhost:3000/Images/`+employee.image} className='emp_det_image'/>
+              <img src={`${import.meta.env.VITE_API_URL}/Images/`+employee.image} className='emp_det_image'/>
               <div className='d-flex align-items-center flex-column mt-5'>
                   <h3>Name: {employee.name}</h3>
                   <h3>Email: {employee.email}</h3>
