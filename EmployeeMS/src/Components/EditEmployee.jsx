@@ -15,7 +15,8 @@ const EditEmployee = () => {
       const navigate = useNavigate()
 
       useEffect(()=> {
-        axios.get('${import.meta.env.VITE_API_URL}/auth/category')
+        // FIXED: Using backticks for template literal
+        axios.get(`${import.meta.env.VITE_API_URL}/auth/category`)
         .then(result => {
             if(result.data.Status) {
                 setCategory(result.data.Result);
@@ -24,7 +25,8 @@ const EditEmployee = () => {
             }
         }).catch(err => console.log(err))
 
-        axios.get('${import.meta.env.VITE_API_URL}/auth/employee/'+id)
+        // FIXED: Using backticks for template literal
+        axios.get(`${import.meta.env.VITE_API_URL}/auth/employee/`+id)
         .then(result => {
             setEmployee({
                 ...employee,
@@ -39,7 +41,8 @@ const EditEmployee = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put('${import.meta.env.VITE_API_URL}/auth/edit_employee/'+id, employee)
+        // FIXED: Using backticks for template literal
+        axios.put(`${import.meta.env.VITE_API_URL}/auth/edit_employee/`+id, employee)
         .then(result => {
             if(result.data.Status) {
                 navigate('/dashboard/employee')
@@ -55,7 +58,7 @@ const EditEmployee = () => {
         <h3 className="text-center">Edit Employee</h3>
         <form className="row g-1" onSubmit={handleSubmit}>
           <div className="col-12">
-            <label for="inputName" className="form-label">
+            <label htmlFor="inputName" className="form-label">
               Name
             </label>
             <input
@@ -70,7 +73,7 @@ const EditEmployee = () => {
             />
           </div>
           <div className="col-12">
-            <label for="inputEmail4" className="form-label">
+            <label htmlFor="inputEmail4" className="form-label">
               Email
             </label>
             <input
@@ -86,7 +89,7 @@ const EditEmployee = () => {
             />
           </div>
           <div className='col-12'>
-            <label for="inputSalary" className="form-label">
+            <label htmlFor="inputSalary" className="form-label">
               Salary
             </label>
             <input
@@ -102,7 +105,7 @@ const EditEmployee = () => {
             />
           </div>
           <div className="col-12">
-            <label for="inputAddress" className="form-label">
+            <label htmlFor="inputAddress" className="form-label">
               Address
             </label>
             <input
@@ -118,13 +121,13 @@ const EditEmployee = () => {
             />
           </div>
           <div className="col-12">
-            <label for="category" className="form-label">
+            <label htmlFor="category" className="form-label">
               Category
             </label>
             <select name="category" id="category" className="form-select"
                 onChange={(e) => setEmployee({...employee, category_id: e.target.value})}>
               {category.map((c) => {
-                return <option value={c.id}>{c.name}</option>;
+                return <option key={c.id} value={c.id}>{c.name}</option>;
               })}
             </select>
           </div>

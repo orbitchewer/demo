@@ -3,11 +3,12 @@ import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const AddCategory = () => {
-    const [category,setCategory] = useState()
+    const [category,setCategory] = useState("") // Initialize as empty string
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`${import.meta.env.VITE_API_URL}/auth/add_category`, {category})
+        // FIXED: Using backticks for template literal
+        axios.post(`${import.meta.env.VITE_API_URL}/auth/add_category`, {category}) 
         .then(result => {
             if(result.data.Status) {
                 navigate('/dashboard/category')
